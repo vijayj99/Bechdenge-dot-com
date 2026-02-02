@@ -1,0 +1,156 @@
+<!-- 
+    INSTRUCTIONS FOR BLOGGER:
+    1. Create a new Page (not Post).
+    2. Name it "Resources".
+    3. Switch the editor to "HTML View" (look for the <> icon or pencil icon).
+    4. Paste the code below EXACTLY as it is.
+    5. Publish.
+-->
+
+<div class="section-padding">
+    <h1 style="text-align: center; margin-bottom: 1rem;">Free <span
+            style="color: var(--color-accent-primary);">Resources</span></h1>
+    <p style="text-align: center; max-width: 600px; margin: 0 auto 3rem auto; color: var(--color-text-secondary);">
+        Download our free guides, templates, and checklists to help you master e-commerce.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
+        <!-- Resource Card 1 -->
+        <div class="resource-card"
+            style="background: white; padding: 2rem; border-radius: 8px; border: 1px solid #d5d9d9; box-shadow: 0 1px 2px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div
+                    style="width: 50px; height: 50px; background: #f3f3f3; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: #ff9900;">
+                    <i data-lucide="file-text" width="24"></i>
+                </div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: #111;">Amazon PPC Audit Checklist</h3>
+                <p style="color: #565959; margin-bottom: 1.5rem; font-size: 0.9rem;">
+                    A comprehensive checklist to audit your PPC campaigns.
+                </p>
+            </div>
+            <button class="btn btn-secondary open-modal-btn" data-resource-title="Amazon PPC Audit Checklist"
+                data-resource-link="#"
+                style="width: 100%; justify-content: center; display: flex; align-items: center; gap: 0.5rem; cursor:pointer;">
+                <i data-lucide="download" width="16"></i> Download PDF
+            </button>
+        </div>
+
+        <!-- Resource Card 2 -->
+        <div class="resource-card"
+            style="background: white; padding: 2rem; border-radius: 8px; border: 1px solid #d5d9d9; box-shadow: 0 1px 2px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div
+                    style="width: 50px; height: 50px; background: #f3f3f3; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: #ff9900;">
+                    <i data-lucide="file-text" width="24"></i>
+                </div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: #111;">Keyword Research Template</h3>
+                <p style="color: #565959; margin-bottom: 1.5rem; font-size: 0.9rem;">
+                    Excel template for organizing your keyword research.
+                </p>
+            </div>
+            <button class="btn btn-secondary open-modal-btn" data-resource-title="Keyword Research Template"
+                data-resource-link="#"
+                style="width: 100%; justify-content: center; display: flex; align-items: center; gap: 0.5rem; cursor:pointer;">
+                <i data-lucide="download" width="16"></i> Download Excel
+            </button>
+        </div>
+    </div>
+
+    <!-- Lead Capture Modal Structure -->
+    <div id="resource-modal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 2000;">
+        <div
+            style="background: white; padding: 2rem; border-radius: 8px; width: 90%; max-width: 400px; position: relative;">
+            <button id="close-modal-btn"
+                style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
+
+            <h2 style="margin-bottom: 1rem; text-align: center; color: #111;">Download Form</h2>
+            <p style="margin-bottom: 1.5rem; text-align: center; color: #666; font-size: 0.9rem;">Please provide your
+                details to access this resource.</p>
+
+            <form id="lead-form">
+                <input type="hidden" id="resource-target" value="">
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; font-size: 0.9rem; margin-bottom: 0.5rem; color: #111;">Name</label>
+                    <input required type="text" id="lead-name"
+                        style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;"
+                        placeholder="John Doe">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; font-size: 0.9rem; margin-bottom: 0.5rem; color: #111;">Email (Gmail
+                        preferred)</label>
+                    <input required type="email" id="lead-email"
+                        style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;"
+                        placeholder="example@gmail.com">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; font-size: 0.9rem; margin-bottom: 0.5rem; color: #111;">Phone
+                        Number</label>
+                    <input required type="tel" id="lead-phone"
+                        style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;"
+                        placeholder="+91 9876543210">
+                </div>
+                <button type="submit" class="btn btn-primary"
+                    style="width: 100%; justify-content: center; background: #f0c14b; border: 1px solid #a88734; color: #111; cursor:pointer;">
+                    Access Download
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        // Re-init icons for this specific content if added dynamically (unlikely in pure blogger page load, but good practice)
+        if (window.lucide) lucide.createIcons();
+
+        const modal = document.getElementById('resource-modal');
+        const closeBtn = document.getElementById('close-modal-btn');
+        const leadForm = document.getElementById('lead-form');
+        const resourceTarget = document.getElementById('resource-target');
+        const btns = document.querySelectorAll('.open-modal-btn');
+
+        btns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const link = btn.getAttribute('data-resource-link');
+
+                // Check session
+                if (sessionStorage.getItem('resourceUser')) {
+                    window.open(link, '_blank');
+                } else {
+                    resourceTarget.value = link;
+                    // Flex display for centering
+                    modal.style.display = 'flex';
+                }
+            });
+        });
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+        }
+
+        if (leadForm) {
+            leadForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('lead-name').value;
+                const email = document.getElementById('lead-email').value;
+                const phone = document.getElementById('lead-phone').value;
+
+                // Session Storage
+                const formData = { name, email, phone };
+                sessionStorage.setItem('resourceUser', JSON.stringify(formData));
+
+                // Close
+                modal.style.display = 'none';
+
+                // Open Link
+                window.open(resourceTarget.value, '_blank');
+
+                alert('Thanks! Your download will start shortly.');
+            });
+        }
+    })();
+</script>
