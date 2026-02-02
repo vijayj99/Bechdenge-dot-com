@@ -56,7 +56,22 @@ const Team = () => {
                             padding: '3px',
                             background: 'rgba(255,255,255,0.05)'
                         }}>
-                            <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+                            <img
+                                src={member.image}
+                                alt={member.name}
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'cover',
+                                    borderRadius: '50%',
+                                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                                }}
+                                onError={(e) => {
+                                    // Fallback to generated avatar if LinkedIn image fails (CORS issue)
+                                    e.target.onerror = null; // Prevent infinite loop
+                                    e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&size=400&background=ec4899&color=fff&bold=true&format=svg`;
+                                }}
+                            />
                         </div>
                         <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{member.name}</h3>
                         <p style={{ color: 'var(--color-primary)', fontWeight: '600', marginBottom: '1rem' }}>{member.role}</p>

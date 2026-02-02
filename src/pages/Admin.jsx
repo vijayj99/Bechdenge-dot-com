@@ -291,7 +291,24 @@ const Admin = () => {
                                         style={{ color: '#ef4444', background: 'rgba(239, 68, 68, 0.1)', border: 'none', borderRadius: '6px', padding: '0.4rem', cursor: 'pointer' }}
                                     ><Trash size={14} /></button>
                                 </div>
-                                <img src={member.image} alt={member.name} style={{ width: '90px', height: '90px', borderRadius: '50%', objectFit: 'cover', marginBottom: '1.25rem', border: '2px solid var(--color-primary)', padding: '3px' }} />
+                                <img
+                                    src={member.image}
+                                    alt={member.name}
+                                    style={{
+                                        width: '90px',
+                                        height: '90px',
+                                        borderRadius: '50%',
+                                        objectFit: 'cover',
+                                        marginBottom: '1.25rem',
+                                        border: '2px solid var(--color-primary)',
+                                        padding: '3px',
+                                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                                    }}
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&size=200&background=ec4899&color=fff&bold=true&format=svg`;
+                                    }}
+                                />
                                 <h3 style={{ fontSize: '1.2rem', color: 'white', marginBottom: '0.4rem' }}>{member.name}</h3>
                                 <p style={{ color: 'var(--color-primary)', fontWeight: '600', fontSize: '0.85rem', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{member.role}</p>
                                 <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: '1.5' }}>{member.bio}</p>
