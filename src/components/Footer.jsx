@@ -114,7 +114,9 @@ const Footer = () => {
                             { label: 'Media Gallery', to: '/gallery' },
                             { label: 'Certifications', to: '/certificates' },
                             { label: 'Book Call', to: '/booking' },
-                            { label: 'Privacy Policy', to: '/privacy-policy' }
+                            { label: 'Contact Us', to: '/contact' },
+                            { label: 'Privacy Policy', to: '/privacy-policy' },
+                            { label: 'Terms of Service', to: '/terms' }
                         ].map((link, idx) => (
                             <li key={idx}>
                                 <Link to={link.to} style={{ textDecoration: 'none', color: 'var(--color-text-secondary)', transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = 'white'} onMouseLeave={(e) => e.target.style.color = 'var(--color-text-secondary)'}>

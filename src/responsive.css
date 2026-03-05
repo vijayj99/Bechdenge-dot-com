@@ -1,0 +1,144 @@
+/* ============================================
+   MOBILE RESPONSIVE FIXES FOR ADMIN PANEL
+   ============================================ */
+
+/* Mobile breakpoints */
+@media (max-width: 768px) {
+
+    /* Admin Dashboard Container */
+    .glass-card {
+        padding: 1.5rem !important;
+    }
+
+    /* Form inputs on mobile */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    textarea {
+        font-size: 16px !important;
+        /* Prevents zoom on iOS */
+    }
+
+    /* Buttons should be easier to tap */
+    button {
+        min-height: 44px;
+        /* iOS recommended touch target size */
+        font-size: 1rem !important;
+    }
+
+    /* Admin tabs - horizontal scroll on mobile */
+    .admin-tabs {
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .admin-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Team member cards - full width on small screens */
+    .team-card {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* Extra small devices */
+    .section-padding {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    /* Smaller text on tiny screens */
+    h1 {
+        font-size: 2rem !important;
+    }
+
+    h2 {
+        font-size: 1.5rem !important;
+    }
+
+    h3 {
+        font-size: 1.2rem !important;
+    }
+
+    /* Form grid - always single column */
+    .form-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Smaller padding on cards */
+    .glass-card {
+        padding: 1rem !important;
+    }
+
+    /* Admin panel header */
+    .admin-header {
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+
+    /* Full width buttons on tiny screens */
+    .btn {
+        width: 100% !important;
+    }
+}
+
+/* Tablet landscape */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .glass-card {
+        padding: 2rem !important;
+    }
+
+    /* Team cards - 2 columns on tablet */
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+
+    /* Increase button sizes for touch */
+    button,
+    .btn {
+        padding: 0.9rem 1.5rem !important;
+        min-height: 48px;
+    }
+
+    /* Increase input padding for touch */
+    input,
+    textarea,
+    select {
+        padding: 0.9rem !important;
+        min-height: 48px;
+    }
+
+    /* Remove hover effects on touch devices */
+    *:hover {
+        transform: none !important;
+    }
+}
+
+/* Landscape orientation on phones */
+@media (max-height: 600px) and (orientation: landscape) {
+
+    /* Reduce vertical padding */
+    .section-padding {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+
+    /* Smaller headers in landscape */
+    h1 {
+        font-size: 2rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    h2 {
+        font-size: 1.5rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+}

@@ -1,26 +1,86 @@
 import React from 'react';
+import { getTeamMembers } from '../lib/supabase';
 
 const Team = () => {
     const [teamMembers, setTeamMembers] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState(null);
 
     React.useEffect(() => {
-        const savedTeam = JSON.parse(localStorage.getItem('teamMembers') || '[]');
-        if (savedTeam.length > 0) {
-            setTeamMembers(savedTeam);
-        } else {
-            // Default placeholder if empty
-            const defaults = [
-                {
-                    id: 1,
-                    name: 'Vijay Savani',
-                    role: 'Founder & Ecommerce Specialist',
-                    image: 'https://via.placeholder.com/400x400',
-                    bio: 'Amazon Trained Ecommerce Specialist with expertise in Google & Meta Ads. Driving sales and optimizing ROAS is my forte.'
-                }
-            ];
-            setTeamMembers(defaults);
-        }
+        fetchTeamMembers();
     }, []);
+
+    const fetchTeamMembers = async () => {
+        try {
+            setLoading(true);
+            const data = await getTeamMembers();
+
+            if (data.length > 0) {
+                setTeamMembers(data);
+            } else {
+                // Default placeholder if database is empty
+                const defaults = [
+                    {
+                        id: 1,
+                        name: 'Vijay Savani',
+                        role: 'Founder & Ecommerce Specialist',
+                        image_url: 'https://via.placeholder.com/400x400',
+                        bio: 'Amazon Trained Ecommerce Specialist with expertise in Google & Meta Ads. Driving sales and optimizing ROAS is my forte.'
+                    }
+                ];
+                setTeamMembers(defaults);
+            }
+        } catch (err) {
+            console.error('Error fetching team members:', err);
+            setError('Failed to load team members. Please try again later.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Loading state
+    if (loading) {
+        return (
+            <div className="section-padding container" style={{ textAlign: 'center', minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div>
+                    <div className="spinner" style={{
+                        width: '50px',
+                        height: '50px',
+                        border: '4px solid rgba(236, 72, 153, 0.1)',
+                        borderTop: '4px solid var(--color-primary)',
+                        borderRadius: '50%',
+                        animation: 'spin 1s linear infinite',
+                        margin: '0 auto 1rem auto'
+                    }}></div>
+                    <p style={{ color: 'var(--color-text-secondary)' }}>Loading team members...</p>
+                </div>
+                <style>{`
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                `}</style>
+            </div>
+        );
+    }
+
+    // Error state
+    if (error) {
+        return (
+            <div className="section-padding container" style={{ textAlign: 'center', minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div>
+                    <p style={{ color: '#ef4444', fontSize: '1.2rem', marginBottom: '1rem' }}>⚠️ {error}</p>
+                    <button
+                        onClick={fetchTeamMembers}
+                        className="cta-button"
+                        style={{ background: 'var(--gradient-primary)', padding: '0.75rem 1.5rem', borderRadius: '8px', border: 'none', cursor: 'pointer', color: 'white', fontSize: '1rem' }}
+                    >
+                        Try Again
+                    </button>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="section-padding container">
@@ -57,7 +117,7 @@ const Team = () => {
                             background: 'rgba(255,255,255,0.05)'
                         }}>
                             <img
-                                src={member.image}
+                                src={member.image_url || member.image}
                                 alt={member.name}
                                 style={{
                                     width: '100%',
@@ -67,7 +127,7 @@ const Team = () => {
                                     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
                                 }}
                                 onError={(e) => {
-                                    // Fallback to generated avatar if LinkedIn image fails (CORS issue)
+                                    // Fallback to generated avatar if image fails
                                     e.target.onerror = null; // Prevent infinite loop
                                     e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&size=400&background=ec4899&color=fff&bold=true&format=svg`;
                                 }}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Save, Layout, MessageSquare, Image, Award, FileText, Download, Trash, Plus, Video, File, Calendar, Briefcase, Users, Edit, Star } from 'lucide-react';
 import Login from './Login';
+import TeamManagementTab from '../components/TeamManagementTab';
 
 const Admin = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -242,79 +243,10 @@ const Admin = () => {
                 </div>
             )}
 
-            {/* --- Team Manager --- */}
+            {/* --- Team Manager (Supabase-Powered) --- */}
             {activeTab === 'team' && (
                 <div className="glass-card" style={{ padding: '2.5rem' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}>
-                        <div>
-                            <h2 style={{ fontSize: '1.5rem', color: 'white', marginBottom: '0.5rem' }}>Manage Team</h2>
-                            <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem' }}>Add or edit team members displayed on the about page.</p>
-                        </div>
-                        <button className="btn btn-secondary" onClick={() => {
-                            const name = prompt('Member Name');
-                            const role = prompt('Designation / Role');
-                            const image = prompt('Image URL (e.g. from LinkedIn or placeholder)');
-                            const bio = prompt('Short Bio');
-                            if (name && role) addItem('teamMembers', teamMembers, setTeamMembers, {
-                                id: Date.now(),
-                                name,
-                                role,
-                                image: image || 'https://via.placeholder.com/400x400',
-                                bio: bio || ''
-                            });
-                        }}> <Plus size={16} /> Add Member</button>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
-                        {teamMembers.map(member => (
-                            <div key={member.id} style={{
-                                background: 'rgba(255, 255, 255, 0.03)',
-                                borderRadius: 'var(--radius-lg)',
-                                padding: '2rem',
-                                border: '1px solid var(--color-border)',
-                                textAlign: 'center',
-                                position: 'relative',
-                                transition: 'all 0.3s ease'
-                            }}>
-                                <div style={{ position: 'absolute', top: 15, right: 15, display: 'flex', gap: '0.5rem' }}>
-                                    <button
-                                        onClick={() => {
-                                            const name = prompt('Member Name', member.name);
-                                            const role = prompt('Designation / Role', member.role);
-                                            const image = prompt('Image URL', member.image);
-                                            const bio = prompt('Short Bio', member.bio);
-                                            if (name && role) updateItem('teamMembers', teamMembers, setTeamMembers, member.id, { name, role, image, bio: bio || '' });
-                                        }}
-                                        style={{ color: 'white', background: 'rgba(255,255,255,0.1)', border: 'none', borderRadius: '6px', padding: '0.4rem', cursor: 'pointer' }}
-                                    ><Edit size={14} /></button>
-                                    <button
-                                        onClick={() => deleteItem('teamMembers', teamMembers, setTeamMembers, member.id)}
-                                        style={{ color: '#ef4444', background: 'rgba(239, 68, 68, 0.1)', border: 'none', borderRadius: '6px', padding: '0.4rem', cursor: 'pointer' }}
-                                    ><Trash size={14} /></button>
-                                </div>
-                                <img
-                                    src={member.image}
-                                    alt={member.name}
-                                    style={{
-                                        width: '90px',
-                                        height: '90px',
-                                        borderRadius: '50%',
-                                        objectFit: 'cover',
-                                        marginBottom: '1.25rem',
-                                        border: '2px solid var(--color-primary)',
-                                        padding: '3px',
-                                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-                                    }}
-                                    onError={(e) => {
-                                        e.target.onerror = null;
-                                        e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&size=200&background=ec4899&color=fff&bold=true&format=svg`;
-                                    }}
-                                />
-                                <h3 style={{ fontSize: '1.2rem', color: 'white', marginBottom: '0.4rem' }}>{member.name}</h3>
-                                <p style={{ color: 'var(--color-primary)', fontWeight: '600', fontSize: '0.85rem', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{member.role}</p>
-                                <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: '1.5' }}>{member.bio}</p>
-                            </div>
-                        ))}
-                    </div>
+                    <TeamManagementTab />
                 </div>
             )}
 

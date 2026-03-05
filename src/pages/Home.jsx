@@ -171,6 +171,43 @@ const Home = () => {
                 </div>
             </div>
 
+            {/* Application Features */}
+            <div className="section-padding container">
+                <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+                    <span style={{ color: 'var(--color-primary)', fontWeight: '600', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Technology Stack</span>
+                    <h2 style={{ fontSize: '2.5rem', marginTop: '1rem' }}>Proprietary E-commerce Suite</h2>
+                    <p style={{ color: 'var(--color-text-secondary)', maxWidth: '700px', margin: '1rem auto 0 auto', lineHeight: '1.6' }}>
+                        Gain the competitive edge with our advanced suite of Amazon seller tools, designed to extract insights and automate your growth.
+                    </p>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+                    {/* Feature 1 */}
+                    <div className="glass-card" style={{ padding: '2.5rem', borderTop: '4px solid var(--color-primary)' }}>
+                        <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'white' }}>Amazon Seller Analytics</h3>
+                        <p style={{ color: 'var(--color-text-secondary)', lineHeight: '1.6' }}>
+                            Deep dive into your sales velocity, conversion rates, and profit margins. Our custom analytics engine connects directly to your seller account to surface hidden opportunities.
+                        </p>
+                    </div>
+
+                    {/* Feature 2 */}
+                    <div className="glass-card" style={{ padding: '2.5rem', borderTop: '4px solid var(--color-secondary)' }}>
+                        <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'white' }}>Amazon Automation Tools</h3>
+                        <p style={{ color: 'var(--color-text-secondary)', lineHeight: '1.6' }}>
+                            Put your bidding and keyword harvesting on autopilot. Our intelligent automation rules continuously optimize your campaigns 24/7, reducing wasted spend and maximizing ROAS.
+                        </p>
+                    </div>
+
+                    {/* Feature 3 */}
+                    <div className="glass-card" style={{ padding: '2.5rem', borderTop: '4px solid var(--color-accent)' }}>
+                        <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'white' }}>Amazon Data Dashboard</h3>
+                        <p style={{ color: 'var(--color-text-secondary)', lineHeight: '1.6' }}>
+                            A unified command center for your entire e-commerce operation. Monitor keyword rankings, inventory levels, and competitor movements all from one central, beautiful dashboard.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             {/* Testimonials */}
             <div className="section-padding container">
                 <h2 style={{ fontSize: '2.5rem', textAlign: 'center', marginBottom: '3rem' }}>Success Stories</h2>

@@ -14,6 +14,9 @@ import Booking from './pages/Booking';
 import Admin from './pages/Admin';
 import Resources from './pages/Resources';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import Contact from './pages/Contact';
+import OAuthRedirect from './pages/OAuthRedirect';
 // Placeholder components for other pages to avoid build errors for now
 import Services from './pages/Services';
 
@@ -35,6 +38,9 @@ function App() {
             <Route path="/booking" element={<Booking />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/oauth/callback" element={<OAuthRedirect />} />
           </Routes>
         </main>
         <Footer />
